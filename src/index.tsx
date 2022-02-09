@@ -1,11 +1,22 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import 'app/styles/index.scss';
 import TicTacToe from './app/components/tictactoe';
+import { AppContext, useAppState } from 'data/context';
 
-ReactDOM.render(
+const rootElement: HTMLElement = document.getElementById('root') as HTMLElement;
+
+const App = () => {
+  const { state, actions } = useAppState();
+  return (
+    <AppContext.Provider value={{ state, actions }}>
+      <TicTacToe state={state} actions={actions} />
+    </AppContext.Provider>
+  );
+};
+render(
   <React.StrictMode>
-    <TicTacToe />
+    <App />
   </React.StrictMode>,
-  document.getElementById('root'),
+  rootElement,
 );

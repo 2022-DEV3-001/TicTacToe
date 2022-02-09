@@ -1,3 +1,5 @@
+import { PlayerProps } from './types';
+
 // Check if their is a winner
 const winConditions = [
   [0, 1, 2],
@@ -14,8 +16,12 @@ export const checkIfWin = (board: string[]) => {
   for (const conditions of winConditions) {
     let [a, b, c] = conditions;
     if (board[a] !== '' && board[a] === board[b] && board[a] === board[c]) {
-      return true;
+      return conditions;
     }
   }
-  return false;
+  return [];
+};
+
+export const getCurrentPlayerIndex = (players: PlayerProps[], currentPlayer: PlayerProps) => {
+  return players.findIndex((player: PlayerProps) => player.id === currentPlayer.id);
 };
