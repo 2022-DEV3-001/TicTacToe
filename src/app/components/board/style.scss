@@ -1,18 +1,7 @@
 @import 'ui/styles/core';
 
 
-
-.container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 100vh;
-  background-color: $white;
-}
-
-
-.tictactoe-container {
+.tictactoe-board {
   display: grid;
   grid-template-columns: repeat(3, auto);
   width: 600px;
