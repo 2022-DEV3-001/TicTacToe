@@ -1,0 +1,26 @@
+
+  {
+    "include": ["src","./config-overrides.js"],
+    "exclude": ["node_modules", "**/dist/*"],
+    "compilerOptions": {
+      "module": "es2020",
+      "target": "es2015",
+      "moduleResolution": "node",
+      "sourceMap": true,
+      "esModuleInterop": true,
+      "jsx": "react",
+      "removeComments": true,
+      "strictNullChecks": true,
+      "noImplicitReturns": true,
+      "noImplicitThis": true,
+      "noUnusedLocals": true,
+      "outDir": "dist",
+      "baseUrl": "src",
+    },
+    "paths": {
+      "ui": ["./src/ui"],
+      "app": ["./src/app"],
+      "data": ["./src/data"],
+      "types": ["./src/data/utils"],
+    },
+  }

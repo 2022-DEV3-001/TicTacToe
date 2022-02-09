@@ -1,0 +1,8 @@
+/* Mixins are going next */
+
+@mixin font($size, $weight, $color, $family: 'Bree Serif') {
+  color: $color;
+  font-family: $family;
+  font-size: $size;
+  font-weight: $weight;
+}
