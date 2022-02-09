@@ -13,7 +13,7 @@
       "strictNullChecks": true,
       "noImplicitReturns": true,
       "noImplicitThis": true,
-      "noUnusedLocals": true,
+      "noUnusedLocals": false,
       "outDir": "dist",
       "baseUrl": "src",
     },

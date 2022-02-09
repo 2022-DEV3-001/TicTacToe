@@ -1,0 +1,23 @@
+@import 'ui/styles/core';
+
+
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: $white;
+}
+
+
+.tictactoe-container {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  width: 600px;
+  max-width: 90%;
+  margin: 10px auto;
+  background-color: $white;
+  color: $primary;
+}
