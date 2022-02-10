@@ -1,6 +1,6 @@
 # TicTacToe
 
-[Link to TicTacToe](https://www.google.com)
+[Link to TicTacToe](https://tictactoe-2022-dev3-001.netlify.app/)
 ## Installation and Setup Instructions
 
 #### Example:
