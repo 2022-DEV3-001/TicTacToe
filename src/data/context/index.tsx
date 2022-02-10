@@ -86,6 +86,7 @@ const useAppState = () => {
   }
 
   // Use local or session storage
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const setStateFunction = () => ({
     ...initialGameState,
     gameIsPaused: checkInitialState('gameIsPaused', initialGameState.gameIsPaused),
@@ -102,6 +103,7 @@ const useAppState = () => {
 
   useEffect(() => {
     setState(setStateFunction);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return { state, actions };
