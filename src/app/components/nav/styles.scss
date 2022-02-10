@@ -1,0 +1,25 @@
+@import 'ui/styles/core';
+nav{
+  width: 456px;
+  max-width: 90%;
+}
+.primary-item{
+  span{
+    font-size:$xxl;
+  }
+  color: $primary
+}
+
+.secondary-item{
+  span{
+    font-size:$xxl;
+  }
+  color: $secondary
+}
+
+.grey-item{
+  span{
+    font-size:$xxl;
+  }
+  color: $grey
+}

@@ -1,0 +1,72 @@
+@import 'ui/styles/core';
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+
+  .current-player-container {
+    border-radius: 25px;
+    border: 2px solid $grey;
+    width: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin: 1em 0;
+    padding: 5px 10px;
+
+    .current-player-item {
+      font-size: 30px;
+      z-index: 3;
+      transition: 0.2s ease-in-out;
+      font-weight: bold;
+
+      &.left {
+        color: $primary;
+      }
+
+      &.right {
+        color: $secondary;
+      }
+
+      &.active {
+        color: $white;
+
+        &.left {
+          margin-left: 3px;
+
+          &:before {
+            background-color: $primary;
+            left: -2px;
+          }
+        }
+
+        &.right {
+          margin-right: 2px;
+
+          &:before {
+            background-color: $secondary;
+            right: -1px;
+          }
+        }
+
+        &:before {
+          transition: 0.2s ease-in-out;
+          content: "";
+          width: 50px;
+          height: 50px;
+          top: -2px;
+          z-index: -1;
+          border-radius: 50%;
+          position: absolute;
+        }
+
+      }
+
+    }
+  }
+
+}

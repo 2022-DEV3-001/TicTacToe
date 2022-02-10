@@ -1,6 +1,6 @@
 /* Mixins are going next */
 
-@mixin font($size, $weight, $color, $family: 'Bree Serif') {
+@mixin font($size, $weight, $color, $family: 'Cocon') {
   color: $color;
   font-family: $family;
   font-size: $size;

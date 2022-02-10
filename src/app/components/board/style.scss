@@ -3,10 +3,15 @@
 
 .tictactoe-board {
   display: grid;
-  grid-template-columns: repeat(3, auto);
-  width: 600px;
+  grid-template-columns: repeat(3, minmax(80px, 3fr));
+  width: 456px;
   max-width: 90%;
+  height: 50vh;
+  max-height: 456px;
   margin: 10px auto;
   background-color: $white;
   color: $primary;
+  @media only screen and (max-width: 568px) {
+    height: 360px;
+  }
 }
