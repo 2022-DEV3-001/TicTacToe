@@ -55,7 +55,7 @@ describe('Test game rules', () => {
   test('Check if draw only if all squares are filled', async () => {
     const loserBoard = ['O', 'X', 'X', 'X', 'X', 'O', 'O', 'O', 'X'];
     expect(checkIfWin(loserBoard)).toHaveLength(0);
-    expect(loserBoard.filter(Boolean)).toHaveLength(9);
+    expect(loserBoard.filter(Boolean)).toHaveLength(loserBoard.length);
   });
 
   test('Players cannot play on a played position', async () => {
