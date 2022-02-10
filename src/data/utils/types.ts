@@ -7,7 +7,8 @@ export interface PlayerProps {
   currentPlayer: boolean;
 }
 export interface GameStateProps {
-  pauseGame: boolean;
+  gameIsPaused: boolean;
+  gameIsDraw: boolean;
   players: PlayerProps[];
   currentPlayer: PlayerProps;
   squareBoard: string[];

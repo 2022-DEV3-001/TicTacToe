@@ -1,4 +1,4 @@
-import { checkIfWin, getCurrentPlayerIndex } from 'data/utils/functions';
+import { userCanPlayAgain, checkIfWin, getCurrentPlayerIndex } from 'data/utils/functions';
 import { PlayerProps, Props } from 'data/utils/types';
 import React from 'react';
 import cx from 'classnames';
@@ -6,14 +6,15 @@ import { Square } from 'ui/components/square';
 import './style.scss';
 
 const Board = ({ state, actions }: Props) => {
-  const { squareBoard, currentPlayer, players, pauseGame, currentWinnerLines } = state;
+  const { squareBoard, currentPlayer, players, gameIsPaused, currentWinnerLines } = state;
   const {
     setSquareBoard,
-    setPauseGame,
+    setGameIsPaused,
     setPlayers,
     setCurrentPlayer,
     setCurrentWinnerLines,
     incrementDraw,
+    setGameIsDraw,
   } = actions;
 
   const handleSquareClick = (index: number) => {
@@ -28,8 +29,7 @@ const Board = ({ state, actions }: Props) => {
     // Check if user wins
     if (checkIfWin(newSquareBoard).length !== 0) {
       setCurrentWinnerLines(checkIfWin(newSquareBoard));
-      setPauseGame(true);
-      console.log(`Player ${currentPlayer.id} wins!`);
+      setGameIsPaused(true);
       newPlayers[playerIndex] = {
         ...newPlayers[playerIndex],
         wins: newPlayers[playerIndex].wins + 1,
@@ -38,6 +38,8 @@ const Board = ({ state, actions }: Props) => {
     } else {
       // Check if draw
       if (newSquareBoard.filter(Boolean).length === squareBoard.length) {
+        setGameIsPaused(true);
+        setGameIsDraw(true);
         incrementDraw();
       }
       setPlayers(newPlayers);
@@ -53,7 +55,7 @@ const Board = ({ state, actions }: Props) => {
           index={i}
           key={i}
           className={cx(currentWinnerLines.length > 0 && currentWinnerLines.includes(i) && 'win')}
-          onClick={() => !value && !pauseGame && handleSquareClick(i)}
+          onClick={() => userCanPlayAgain(value, gameIsPaused) && handleSquareClick(i)}
         />
       ))}
     </main>

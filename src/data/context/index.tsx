@@ -2,7 +2,7 @@ import { GameStateProps, PlayerProps } from 'data/utils/types';
 import { useState, useContext, createContext, useEffect } from 'react';
 import UseStorage from 'data/utils/useLocalStorage';
 
-const { getItemFromStorage, setItemInStorage, removeItemFromStorage } = UseStorage();
+const { getItemFromStorage, setItemInStorage, clearStorage } = UseStorage();
 
 const initPlayers: PlayerProps[] = [
   { id: 1, value: 'X', wins: 0, currentPlayer: true },
@@ -10,7 +10,8 @@ const initPlayers: PlayerProps[] = [
 ];
 
 const initialGameState: GameStateProps = {
-  pauseGame: false,
+  gameIsPaused: false,
+  gameIsDraw: false,
   players: initPlayers,
   currentPlayer: initPlayers[0],
   squareBoard: Array(9).fill(''),
@@ -26,9 +27,13 @@ export type ActionsType = ReturnType<typeof useAppState>['actions'];
 const useAppState = () => {
   const [state, setState] = useState(initialGameState);
   const actions = {
-    setPauseGame: (pauseGame: boolean) => {
-      setItemInStorage('pauseGame', JSON.stringify(pauseGame));
-      setState((oldState) => ({ ...oldState, pauseGame }));
+    setGameIsPaused: (gameIsPaused: boolean) => {
+      setItemInStorage('gameIsPaused', JSON.stringify(gameIsPaused));
+      setState((oldState) => ({ ...oldState, gameIsPaused }));
+    },
+    setGameIsDraw: (gameIsDraw: boolean) => {
+      setItemInStorage('gameIsDraw', JSON.stringify(gameIsDraw));
+      setState((oldState) => ({ ...oldState, gameIsDraw }));
     },
     setPlayers: (players: PlayerProps[]) => {
       setItemInStorage('players', JSON.stringify(players));
@@ -43,6 +48,7 @@ const useAppState = () => {
       setState((oldState) => ({ ...oldState, squareBoard }));
     },
     setCurrentWinnerLines: (currentWinnerLines: [] | number[]) => {
+      setItemInStorage('currentWinnerLines', JSON.stringify(currentWinnerLines));
       setState((oldState) => ({ ...oldState, currentWinnerLines }));
     },
     incrementDraw: () => {
@@ -52,10 +58,23 @@ const useAppState = () => {
         return { ...oldState, draws };
       });
     },
-    resetGame: () => {
-      actions.setPauseGame(false);
+    reloadGame: () => {
+      actions.setGameIsPaused(false);
+      actions.setGameIsDraw(false);
+      actions.setCurrentWinnerLines([]);
+      actions.setPlayers([
+        { ...state.players[0], currentPlayer: true },
+        { ...state.players[1], currentPlayer: false },
+      ]);
       actions.setCurrentPlayer(initialGameState.players[0]);
       actions.setSquareBoard(Array(9).fill(''));
+    },
+    resetGame: () => {
+      actions.reloadGame();
+      actions.setPlayers(initialGameState.players);
+      setItemInStorage('draws', JSON.stringify(0));
+      setState((oldState) => ({ ...oldState, draws: 0 }));
+      clearStorage();
     },
   };
 
@@ -69,10 +88,15 @@ const useAppState = () => {
   // Use local or session storage
   const setStateFunction = () => ({
     ...initialGameState,
-    pauseGame: checkInitialState('pauseGame', initialGameState.pauseGame),
+    gameIsPaused: checkInitialState('gameIsPaused', initialGameState.gameIsPaused),
+    gameIsDraw: checkInitialState('gameIsDraw', initialGameState.gameIsDraw),
     players: checkInitialState('players', initialGameState.players),
     currentPlayer: checkInitialState('currentPlayer', initialGameState.currentPlayer),
     squareBoard: checkInitialState('squareBoard', initialGameState.squareBoard),
+    currentWinnerLines: checkInitialState(
+      'currentWinnerLines',
+      initialGameState.currentWinnerLines,
+    ),
     draws: checkInitialState('draws', initialGameState.draws),
   });
 
