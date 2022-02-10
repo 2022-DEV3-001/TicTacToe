@@ -22,5 +22,6 @@
       "app": ["./src/app"],
       "data": ["./src/data"],
       "types": ["./src/data/utils"],
+      "src": ["./src"],
     },
   }
