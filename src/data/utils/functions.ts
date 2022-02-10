@@ -25,3 +25,10 @@ export const checkIfWin = (board: string[]) => {
 export const getCurrentPlayerIndex = (players: PlayerProps[], currentPlayer: PlayerProps) => {
   return players.findIndex((player: PlayerProps) => player.id === currentPlayer.id);
 };
+
+export const userCanPlayAgain = (value, gameIsPaused) => {
+  if (value.length > 0 || gameIsPaused) {
+    return false;
+  }
+  return true;
+};

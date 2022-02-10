@@ -15,7 +15,7 @@ export const Square = ({ value, index, className, ...props }: Props): ReactEleme
       {...props}
       data-testid={`square`}
       className={cx('square', value === 'O' && 'secondary', className)}
-      title={value}
+      role={value}
     >
       {(value === '' || value === 'X' || value === 'O') && value}
     </div>
